@@ -3,6 +3,7 @@ package com.api.ganasoft.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 // import org.springframework.http.HttpStatus;
 // import org.springframework.http.ResponseEntity;
 // import org.springframework.validation.BindingResult;
@@ -10,11 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 // import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.ganasoft.models.Cattle;
+// import com.api.ganasoft.models.Client;
 import com.api.ganasoft.services.CattleService;
 
 @RestController
@@ -30,8 +34,18 @@ public class CattleController {
     } 
 
     @PostMapping
-    public void save (@PathVariable Long cattle) {
-        
+    public void save (@RequestBody Cattle cattle) {
+        cattleService.saveCattle(cattle);
+    }
+
+    @PutMapping("/{id}")
+    public void save (@PathVariable Long id, @RequestBody Cattle cattle) {
+        cattleService.saveCattle(cattle);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete (@PathVariable Long id) {
+        cattleService.delete(id);
     }
 
     // @PostMapping
